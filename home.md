@@ -1,13 +1,11 @@
-<img src="assets/logo.png" alt="Style Dictionary logo" title="StyleDictionary" width="150" align="right" />
-
-# Foo
+# Soluble
 
 > An awesome project.
 
 
 # Getting Started
 
-WHen the white knight.
+Getting started. 
 
 ## Fizz Buzz
 
