@@ -2,6 +2,11 @@
 
 Soluble Fusion makes it easy to run secure services on Kubernetes!
 
+## Mutli-Cluster / Multi-Cloud Management
+
+As you grow, Fusion reduces the burdern of operating dozens (or even hundreds) of Kubernetes clusters securely when they are spread across cloud providers (AWS, GCP, Azure, etc.)
+
+
 ## Workload Identity
 
 Soluble Fusion makes it easy for developers to maintain IAM mapping between Kubernetes service accounts and Cloud IAM roles/service accounts.  Soluble
