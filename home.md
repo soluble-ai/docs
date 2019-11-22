@@ -1,6 +1,6 @@
 # Soluble Fusion
 
-Making security simple for Kubernetes!
+Soluble Fusion makes it easy to run secure services on Kubernetes!
 
 ## Workload Identity
 
