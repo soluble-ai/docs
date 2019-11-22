@@ -40,4 +40,6 @@ Future features:
 2. Ability to establish mapping to an existing role
 2. Permission grants to specific cloud resources specified in YAML
 
+## Certificate Management
 
+TBD
