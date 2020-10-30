@@ -1,6 +1,4 @@
 
-
-
 <!doctype html>
 <html lang="en" class="no-js">
   <head>
@@ -11,7 +9,7 @@
       
       
       <link rel="shortcut icon" href="../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-5.5.12">
+      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-6.1.0">
     
     
       
@@ -19,13 +17,17 @@
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/main.4dd2dd8d.min.css">
+      <link rel="stylesheet" href="../assets/stylesheets/main.bc7e593a.min.css">
       
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.ab28b872.min.css">
+        
       
     
     
     
       
+        
         <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
         <style>body,input{font-family:"Roboto",-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono",SFMono-Regular,Consolas,Menlo,monospace}</style>
@@ -44,9 +46,14 @@
   </head>
   
   
-    <body dir="ltr">
-  
     
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="none" data-md-color-accent="none">
+      
+  
     <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
     <label class="md-overlay" for="__drawer"></label>
@@ -62,7 +69,9 @@
       
     </div>
     
-      <header class="md-header" data-md-component="header">
+      
+
+<header class="md-header" data-md-component="header">
   <nav class="md-header-nav md-grid" aria-label="Header">
     <a href=".." title="Soluble Fusion Docs" class="md-header-nav__button md-logo" aria-label="Soluble Fusion Docs">
       
@@ -124,8 +133,6 @@
     
     <div class="md-container" data-md-component="container">
       
-        
-      
       
         
       
@@ -136,7 +143,9 @@
               <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
                 <div class="md-sidebar__scrollwrap">
                   <div class="md-sidebar__inner">
-                    <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+                    
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
     <a href=".." title="Soluble Fusion Docs" class="md-nav__button md-logo" aria-label="Soluble Fusion Docs">
       
@@ -155,7 +164,7 @@
 
 
   <li class="md-nav__item">
-    <a href=".." title="Home" class="md-nav__link">
+    <a href=".." class="md-nav__link">
       Home
     </a>
   </li>
@@ -167,7 +176,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../getting-started/" title="Quick Start" class="md-nav__link">
+    <a href="../getting-started/" class="md-nav__link">
       Quick Start
     </a>
   </li>
@@ -192,7 +201,7 @@
         <span class="md-nav__icon md-icon"></span>
       </label>
     
-    <a href="./" title="CLI" class="md-nav__link md-nav__link--active">
+    <a href="./" class="md-nav__link md-nav__link--active">
       CLI
     </a>
     
@@ -247,6 +256,30 @@
   
 </nav>
     
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../pipelines/" class="md-nav__link">
+      CI/CD Pipelines
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../git-repos/" class="md-nav__link">
+      GIT Repositories
+    </a>
   </li>
 
     
@@ -320,9 +353,6 @@
               
                 
                 
-                  
-                
-                
                 <h1 id="cli">CLI</h1>
 <p>This is the optional command line interface for interacting with Soluble APIs:</p>
 <h2 id="installation">Installation</h2>
@@ -331,16 +361,13 @@
 <div class="codehilite"><pre><span></span><code>brew install soluble-ai/soluble/soluble-cli
 </code></pre></div>
 
-
 <p>To upgrade to the latest version:</p>
 <div class="codehilite"><pre><span></span><code>brew upgrade soluble-ai/soluble/soluble-cli
 </code></pre></div>
 
-
 <p>On Linux, run:</p>
 <div class="codehilite"><pre><span></span><code>curl https://raw.githubusercontent.com/soluble-ai/soluble-cli/master/linux-install.sh <span class="p">|</span> sh
 </code></pre></div>
-
 
 <p>The install will drop the executable in the current directory.  Move it to wherever is convenient.</p>
 <p>Windows executables can be found on the <a href="https://github.com/soluble-ai/soluble-cli/releases">releases page</a>.</p>
@@ -350,12 +377,10 @@
 ./hack/build.sh
 ./soluble version
 </code></pre>
-
 <h2 id="usage">Usage</h2>
 <p>You'll need to generate an access token from the <a href="https://app.soluble.cloud/admin/tokens/access">UI</a>.  Copy the access token and run:</p>
 <div class="codehilite"><pre><span></span><code>$ soluble auth set-access-token --access-token &lt;your-access-token&gt;
 </code></pre></div>
-
 
 <p>If successful the CLI will show your user profile.</p>
 <p>Some useful commands:</p>
@@ -363,16 +388,13 @@
 <div class="codehilite"><pre><span></span><code>$ soluble <span class="nb">help</span>
 </code></pre></div>
 
-
 <p>List clusters:</p>
 <div class="codehilite"><pre><span></span><code>$ soluble cluster list
 </code></pre></div>
 
-
 <p>List available queries:</p>
 <div class="codehilite"><pre><span></span><code>$ soluble query list
 </code></pre></div>
-
 
 <p>Run a query named <code>deployments</code></p>
 <div class="codehilite"><pre><span></span><code>$ soluble query run --query-name deployments
@@ -395,7 +417,7 @@
     <div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid" aria-label="Footer">
         
-          <a href="../getting-started/" title="Quick Start" class="md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+          <a href="../getting-started/" class="md-footer-nav__link md-footer-nav__link--prev" rel="prev">
             <div class="md-footer-nav__button md-icon">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
             </div>
@@ -409,6 +431,20 @@
             </div>
           </a>
         
+        
+          <a href="../pipelines/" class="md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-footer-nav__title">
+              <div class="md-ellipsis">
+                <span class="md-footer-nav__direction">
+                  Next
+                </span>
+                CI/CD Pipelines
+              </div>
+            </div>
+            <div class="md-footer-nav__button md-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
+            </div>
+          </a>
         
       </nav>
     </div>
@@ -429,15 +465,15 @@
       
     </div>
     
-      <script src="../assets/javascripts/vendor.3636a4ec.min.js"></script>
-      <script src="../assets/javascripts/bundle.e9fe3281.min.js"></script><script id="__lang" type="application/json">{"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents"}</script>
+      <script src="../assets/javascripts/vendor.6a3d08fc.min.js"></script>
+      <script src="../assets/javascripts/bundle.71201edf.min.js"></script><script id="__lang" type="application/json">{"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing"}</script>
       
       <script>
         app = initialize({
           base: "..",
           features: [],
           search: Object.assign({
-            worker: "../assets/javascripts/worker/search.5eca75d3.min.js"
+            worker: "../assets/javascripts/worker/search.4ac00218.min.js"
           }, typeof search !== "undefined" && search)
         })
       </script>
