@@ -255,8 +255,8 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#generate-access-token" class="md-nav__link">
-    Generate Access token
+  <a href="#generating-access-token" class="md-nav__link">
+    Generating Access token
   </a>
   
 </li>
@@ -480,8 +480,8 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#generate-access-token" class="md-nav__link">
-    Generate Access token
+  <a href="#generating-access-token" class="md-nav__link">
+    Generating Access token
   </a>
   
 </li>
@@ -583,17 +583,15 @@
                 <h1 id="soluble-basics">Soluble Basics</h1>
 <h2 id="user-management">User Management</h2>
 <p>Every user signed up for Soluble will be provided with a default organization. And the user has the ability to invite other people to his organization and can be assigned a role ( <code>Owner</code>, <code>Write</code> and <code>Read</code> ). Each invited user will be part of the organization he is invited for and a default organization of his own, so he can explore Soluble on his own.</p>
-<h3 id="invite-user">Invite user</h3>
+<h4 id="invite-user">Invite user</h4>
 <ol>
 <li>
 <p>Under <code>settings</code>, press <code>Users</code>.</p>
 </li>
 <li>
 <p>Under the Users, press <code>Invite</code>.</p>
-</li>
-</ol>
 <p><img alt="SSH Page" src="../img/invite-user.png" /></p>
-<ol>
+</li>
 <li>
 <p>Provide the email address of the person whom you would like to invite to your organization and select a role from the dropdown. User roles explained below.</p>
 </li>
@@ -601,10 +599,12 @@
 <p>Press <code>Invite</code></p>
 </li>
 </ol>
-<h3 id="roles">Roles</h3>
-<p>Each user role is specific to that particular organization where it was applied.
-* <code>Owner</code> - The user who created the initial account for the organization is the Owner. The Owner will have access to all the functionalities in that particular organization. He has the permission to grant / revoke permissions to the other users in the organization.</p>
+<h4 id="roles">Roles</h4>
+<p>Each user role is specific to that particular organization where it was applied.</p>
 <ul>
+<li>
+<p><code>Owner</code> - The user who created the initial account for the organization is the Owner. The Owner will have access to all the functionalities in that particular organization. He has the permission to grant / revoke permissions to the other users in the organization.</p>
+</li>
 <li>
 <p><code>Write</code> - The user has the permissions for reading and writing any entities in the organization except for <code>Users</code> and <code>Billing</code>.</p>
 </li>
@@ -622,28 +622,35 @@
 <p>Agent tokens - These are used by Soluble agents deployed in Kubernetes clusters.</p>
 </li>
 </ul>
-<h3 id="generate-access-token">Generate Access token</h3>
+<h4 id="generating-access-token">Generating Access token</h4>
 <p>To generate an access token</p>
 <ol>
 <li>Under <code>Settings</code>, press <code>Tokens</code>.</li>
-<li>Under the access tokens, click on <code>Generate Access Token</code>.</li>
-</ol>
+<li>
+<p>Under the access tokens, click on <code>Generate Access Token</code>.</p>
 <p><img alt="SSH Page" src="../img/access-token.png" /></p>
-<h3 id="agent-tokens">Agent Tokens</h3>
+</li>
+</ol>
+<h4 id="agent-tokens">Agent Tokens</h4>
 <p>All the agent tokens used by Soluble agents for kubernetes should be visible under the Agent tokens.</p>
-<h3 id="token-management">Token Management</h3>
+<h4 id="token-management">Token Management</h4>
 <p>Any user with the right permissions will be able to <code>Disable</code> or <code>Revoke</code> tokens.</p>
-<p><img alt="SSH Page" src="../img/revoke-token.png" /></p>
+<pre class="highlight"><code>  ![SSH Page](img/revoke-token.png)
+</code></pre>
 <h2 id="organization-setup">Organization Setup</h2>
 <p>The owner of the organization can configure the Organization settings like the display name of the organization, Login provider for organization. Organization ID is provided by the Soluble itself and users don’t have access to edit them.</p>
-<p><img alt="SSH Page" src="../img/org_setup.png" /></p>
+<pre class="highlight"><code>  ![SSH Page](img/org_setup.png)
+</code></pre>
 <h2 id="alerts">Alerts</h2>
-<p>Alerts provide an easy way to handle any issues identified by the Soluble Fusion platform. Alerts are automatically created by Soluble as well as they can be created for any particular issue in findings from the assessments.</p>
-<p>Soluble when integrated with other third party platforms like Slack, Jira., it provides an easy way to manage the security / configuration issues identified by Soluble.</p>
-<p><img alt="SSH Page" src="../img/alerts.png" /></p>
+<p>Alerts provide an easy way to handle any issues identified by the Soluble Fusion platform. Alerts can be created for the failed findings from the assessments from a finding's action</p>
+<p>Soluble when integrated with other third party platforms like Slack, Jira., it provides an easy way to manage the security / configuration issues identified by Soluble and automates Jira creation with just a click of a button and Slack notification.</p>
+<pre class="highlight"><code>  ![SSH Page](img/alerts.png)
+
+</code></pre>
 <h2 id="dashboard">Dashboard</h2>
 <p>Soluble dashboard provides an easy way for tracking, analyzing and displaying the key information, which helps you to monitor the security / configuration issues in your infrastructure.</p>
-<p><img alt="SSH Page" src="../img/dashboard.png" /></p>
+<pre class="highlight"><code>  ![SSH Page](img/dashboard.png)
+</code></pre>
 <h2 id="integrations">Integrations</h2>
 <p>Soluble provides an easy way to integrate with third party tools like</p>
 <ul>
@@ -653,24 +660,28 @@
 <li>kubernetes</li>
 </ul>
 <p>To integrate with the above tools, click on the <code>Integrations</code> sidebar navigation.</p>
-<h3 id="slack">Slack</h3>
+<h4 id="slack">Slack</h4>
 <p>Soluble can be integrated with just a click of a button.</p>
 <p>Configuring Slack with Soluble:</p>
 <ol>
-<li>Navigate to <code>Integrations</code> page and click on <code>Slack</code> Tile <code>Configure</code> button.</li>
-</ol>
+<li>
+<p>Navigate to <code>Integrations</code> page and click on <code>Slack</code> Tile <code>Configure</code> button.</p>
 <p><img alt="SSH Page" src="../img/slack.png" /></p>
-<h3 id="jira">Jira</h3>
+</li>
+</ol>
+<h4 id="jira">Jira</h4>
 <p>You need <a href="https://confluence.atlassian.com/cloud/api-tokens-938839638.html">Jira API token</a> for this.</p>
 <p>Enter the following Jira details to finish the integration.</p>
 <ul>
 <li>URL - Domain of the Jira URL of your organization.</li>
 <li>Username - Jira username of the provided api token.</li>
 <li>Key - API token created above.</li>
-<li>Default Project - Provides the default project that can be used by Soluble to create Jira tickets for Soluble alerts.</li>
-</ul>
+<li>
+<p>Default Project - Provides the default project that can be used by Soluble to create Jira tickets for Soluble alerts.</p>
 <p><img alt="SSH Page" src="../img/jira-config.png" /></p>
-<h3 id="aws">AWS</h3>
+</li>
+</ul>
+<h4 id="aws">AWS</h4>
 <p>Soluble can be integrated with AWS by running a simple script.</p>
 <p>Adding an AWS Account:</p>
 <ol>
@@ -678,11 +689,11 @@
 <p>Under the <code>Integrations</code> side menu, click on the AWS tile.</p>
 </li>
 <li>
-<p>Click on the <code>Add Account</code> button and follow the instructions provided there.</p>
+<p>Click on the <code>Add Account</code> button and copy the command provided and run it in  your terminal.</p>
+<p><img alt="SSH Page" src="../img/aws-config.png" /></p>
 </li>
 </ol>
-<p><img alt="SSH Page" src="../img/aws-config.png" /></p>
-<h3 id="kubernetes">kubernetes</h3>
+<h4 id="kubernetes">kubernetes</h4>
 <p>To add kubernetes clusters to Soluble:</p>
 <ol>
 <li>
@@ -690,9 +701,9 @@
 </li>
 <li>
 <p>Click on <code>Add Cluster</code> and follow the three simple steps provided there.</p>
+<p><img alt="SSH Page" src="../img/k_cluster.png" /></p>
 </li>
 </ol>
-<p><img alt="SSH Page" src="../img/k_cluster.png" /></p>
                 
               
               
