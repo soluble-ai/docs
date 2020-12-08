@@ -14,7 +14,7 @@
     
     
       
-        <title>Repositories - Soluble Fusion Docs</title>
+        <title>Cinderella clusters - Soluble Fusion Docs</title>
       
     
     
@@ -61,7 +61,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#repositories" class="md-skip">
+        <a href="#cinderella-clusters" class="md-skip">
           Skip to content
         </a>
       
@@ -91,7 +91,7 @@
           </span>
           <span class="md-header-nav__topic md-ellipsis">
             
-              Repositories
+              Cinderella clusters
             
           </span>
         </div>
@@ -211,11 +211,20 @@
       
       
 
+  
 
-  <li class="md-nav__item">
-    <a href="../cinderellas/" class="md-nav__link">
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+      
+    
+    
+    <a href="./" class="md-nav__link md-nav__link--active">
       Cinderella clusters
     </a>
+    
   </li>
 
     
@@ -235,20 +244,11 @@
       
       
 
-  
 
-
-  <li class="md-nav__item md-nav__item--active">
-    
-    <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
-    
-      
-    
-    
-    <a href="./" class="md-nav__link md-nav__link--active">
+  <li class="md-nav__item">
+    <a href="../git-repos/" class="md-nav__link">
       Repositories
     </a>
-    
   </li>
 
     
@@ -304,11 +304,37 @@
               
                 
                 
-                <h1 id="repositories">Repositories</h1>
-<p>Soluble Repositories view provides an easy view that contains all you need to know to get you quickly up-to-date about a repository. It's a single plane of view for all the Static code analysis report, Image scanning results and Secrets scanner.  </p>
-<p>Using the Soluble CLI inventory scanner, you get a list of what kind of files the repository contains and their corresponding assessment results.</p>
-<p><img alt="SSH Page" src="../img/repos.png" /></p>
-<p>Repository view also provide an easy way to view assessment report for all the recent git branches and also allows to view a diff between two commits of a repo. This allows the user to make decisions on the security posture of a repository.</p>
+                <h1 id="cinderella-clusters">Cinderella clusters</h1>
+<p>Soluble Cinderella clusters provide a quick, easy way to explore the kubernetes ecosystem. Create a cluster, deploy containers, test different configurations. Cinderella clusters are automatically deleted when their times run out.</p>
+<p>Try Cinderella</p>
+<ol>
+<li>You won’t have to do this every time you start a Cinderella cluster. Click on the <a href="https://app.soluble.cloud/start/try-cinderella">link</a></li>
+</ol>
+<p><img alt="Cinderella Page" src="../img/cinderella-start.png" /></p>
+<ol>
+<li>
+<p>Click on "Let's go!" to get started.</p>
+</li>
+<li>
+<p>Next we need to import one (or more) SSH public keys so we can log in to the node running the cluster. If you have a GitHub account with SSH public keys, Soluble can just import those; that’s what we’ll do here:</p>
+</li>
+</ol>
+<p><img alt="SSH Page" src="../img/add-ssh-key.png" /></p>
+<ol>
+<li>After clicking on Add, the keys are imported and we’re taken to the loading page. It takes about a minute for the cluster to spin up. When the cluster is ready, you’ll receive a notification in the upper right corner. When you click <code>Continue</code>, you’ll be taken to the Cinderella Clusters page:</li>
+</ol>
+<p><img alt="SSH Page" src="../img/cinderella_main.png" /></p>
+<ol>
+<li>Next we’ll log in to the node running the cluster via SSH. To make this easy, we can copy the SSH command to log in to the node by clicking on the three vertical dots in the Actions column of the row with our Cinderella cluster:</li>
+</ol>
+<p><img alt="SSH Page" src="../img/connection-string.png" /></p>
+<ol>
+<li>Next, open a terminal window, paste the command you copied at the prompt, and hit return. We’ll be asked to confirm the SSH key of the remote host and will get a prompt that looks something like:</li>
+</ol>
+<p><img alt="SSH Page" src="../img/initial-login.png" /></p>
+<ol>
+<li>Run the <code>kubectl</code> command and explore the cluster.</li>
+</ol>
                 
               
               
@@ -327,7 +353,7 @@
     <div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid" aria-label="Footer">
         
-          <a href="../assessments/" class="md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+          <a href="../cli/" class="md-footer-nav__link md-footer-nav__link--prev" rel="prev">
             <div class="md-footer-nav__button md-icon">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
             </div>
@@ -336,19 +362,19 @@
                 <span class="md-footer-nav__direction">
                   Previous
                 </span>
-                Assessments
+                CLI
               </div>
             </div>
           </a>
         
         
-          <a href="../policies/" class="md-footer-nav__link md-footer-nav__link--next" rel="next">
+          <a href="../assessments/" class="md-footer-nav__link md-footer-nav__link--next" rel="next">
             <div class="md-footer-nav__title">
               <div class="md-ellipsis">
                 <span class="md-footer-nav__direction">
                   Next
                 </span>
-                Policies
+                Assessments
               </div>
             </div>
             <div class="md-footer-nav__button md-icon">
