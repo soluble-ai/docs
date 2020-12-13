@@ -9,7 +9,7 @@
   
   
   <link rel="shortcut icon" href="../img/favicon.ico">
-  <title>Assessments - Soluble Fusion Docs</title>
+  <title>Cloud Posture Management - Soluble Fusion Docs</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700" />
 
   <link rel="stylesheet" href="../css/theme.css" />
@@ -18,8 +18,8 @@
   
   <script>
     // Current page data
-    var mkdocs_page_name = "Assessments";
-    var mkdocs_page_input_path = "assessments.md";
+    var mkdocs_page_name = "Cloud Posture Management";
+    var mkdocs_page_input_path = "cloud-posture.md";
     var mkdocs_page_url = null;
   </script>
   
@@ -59,20 +59,24 @@
                     <li class="toctree-l1"><a class="reference internal" href="../cli/">CLI</a>
                     </li>
                 </ul>
-                <ul class="current">
-                    <li class="toctree-l1 current"><a class="reference internal current" href="./">Assessments</a>
-    <ul class="current">
-    <li class="toctree-l2"><a class="reference internal" href="#static-code-analysis">Static Code Analysis</a>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#image-scanning">Image Scanning</a>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#secrets-scanning">Secrets Scanning</a>
-    </li>
-    </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../assessments/">Assessments</a>
                     </li>
                 </ul>
-                <ul>
-                    <li class="toctree-l1"><a class="reference internal" href="../cloud-posture/">Cloud Posture Management</a>
+                <ul class="current">
+                    <li class="toctree-l1 current"><a class="reference internal current" href="./">Cloud Posture Management</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#cloudsploit">Cloudsploit</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#run-via-docker">Run via Docker</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#run-via-kubernetes">Run via Kubernetes</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#have-soluble-fusion-run-it-for-you">Have Soluble Fusion Run It For You</a>
+    </li>
+        </ul>
+    </li>
+    </ul>
                     </li>
                 </ul>
                 <ul>
@@ -112,7 +116,7 @@
     
       
     
-    <li>Assessments</li>
+    <li>Cloud Posture Management</li>
     <li class="wy-breadcrumbs-aside">
       
     </li>
@@ -123,26 +127,57 @@
           <div role="main">
             <div class="section">
               
-                <h1 id="assessments">Assessments</h1>
-<h3 id="static-code-analysis">Static Code Analysis</h3>
-<p>The Soluble Fusion platform allows you to operationalize the data collected from the open source static code analysis tools, including:</p>
-<ul>
-<li><a href="https://github.com/aws-cloudformation/cfn-python-lint">Cfn Python Lint</a></li>
-<li><a href="https://github.com/tfsec/tfsec">TfSec</a></li>
-<li><a href="https://www.checkov.io/">Checkov</a></li>
-<li><a href="https://github.com/accurics/terrascan">Terrascan</a></li>
-</ul>
-<p>We let you use your existing policies created for the above open source tools and take advantage of the community contributed policies along with the Soluble policies developed for you.</p>
-<p>We give you flexibility to run one or more of such tools of your choice, to provide maximum security coverage of your infrastructure and to give you freedom from vendor lock-in.</p>
-<p>If you want us to integrate with any other tools or solutions, please let us know by <a href="support@soluble.ai">emailing the support</a>.</p>
-<p>You need Soluble CLI to start using the above tools. Please follow the Soluble CLI installation steps to install the CLI.</p>
-<p><img alt="SSH Page" src="../img/iac-scan-cli.png" /></p>
-<h3 id="image-scanning">Image Scanning</h3>
-<p>Soluble provides a simple and comprehensive vulnerability scanner for containers and other artifacts. It's easy to plug in to CI.</p>
-<p><img alt="SSH Page" src="../img/image-scan.png" /></p>
-<h3 id="secrets-scanning">Secrets Scanning</h3>
-<p>The Soluble secrets scanner searches through git repositories for secrets. Plugging this CLI service into the CI provides an easy way to prevent accidental check-in of secrets.</p>
-<p><img alt="SSH Page" src="../img/secrets-scan.png" /></p>
+                <h1 id="cloud-posture-management">Cloud Posture Management</h1>
+<h2 id="cloudsploit">Cloudsploit</h2>
+<p><a href="https://github.com/aquasecurity/cloudsploit">Cloudsploit</a> is a great cloud security scanner from Aqua Security. </p>
+<p>Cloudsploit supports AWS, GCP, Azure and even Oracle cloud.  </p>
+<p>Soluble has packaged clousdploit as a container image that can be run via Docker or Kubernetes.  </p>
+<h3 id="run-via-docker">Run via Docker</h3>
+<p>Assuming the <a href="/cli">soluble CLI is configured</a> and you have AWS credentials in environment variables, run the
+following:</p>
+<pre><code class="language-bash">docker run -it  --rm \
+-e AWS_ACCESS_KEY_ID \
+-e AWS_SECRET_ACCESS_KEY \
+-e AWS_SESSION_TOKEN
+-v ${HOME}/.soluble:/app/.soluble \
+gcr.io/soluble-repo/soluble-cloudsploit
+
+</code></pre>
+<p>If your AWS configuration is in <code>~/.aws</code>, the following will work as well:</p>
+<pre><code class="language-bash">docker run -it --rm \
+-v ${HOME}/.aws:/app/.aws \
+-v ${HOME}/.soluble:/app/.soluble \
+gcr.io/soluble-repo/soluble-cloudsploit
+</code></pre>
+<p>Cloudsploit can take a while to run.  </p>
+<p>When it has completed, it will send the results to <a href="https://app.soluble.cloud/assessments">Soluble Fusion</a>.</p>
+<h3 id="run-via-kubernetes">Run via Kubernetes</h3>
+<p>The following job template will run cloudsploit and send the results to Soluble Fusion.  </p>
+<pre><code class="language-yaml">apiVersion: batch/v1
+kind: Job
+metadata:
+  generateName: cloudsploit-
+spec:
+  template:
+    spec:
+      containers:
+        - image: gcr.io/soluble-repo/soluble-cloudsploit:latest
+          name: cloudsploit
+          imagePullPolicy: Always
+          env:
+            - name: AWS_ACCESS_KEY_ID
+              value: &quot;&quot;
+            - name: AWS_SECRET_ACCESS_KEY
+              value: &quot;&quot;
+            - name: AWS_SESSION_TOKEN
+              value: &quot;&quot;
+            - name: SOLUBLE_API_TOKEN
+              value: &quot;&quot;
+      restartPolicy: Never
+</code></pre>
+<p><em>The example above is meant for illustrative purposes only.  You should consider using kubernetes secrets or use integrated IAM provide credentials to cloudsploit.</em></p>
+<h3 id="have-soluble-fusion-run-it-for-you">Have Soluble Fusion Run It For You</h3>
+<p>Soluble Fusion can execute cloudsploit for you if you add your AWS accounts.</p>
               
             </div>
           </div>
@@ -150,10 +185,10 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../cloud-posture/" class="btn btn-neutral float-right" title="Cloud Posture Management">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../git-repos/" class="btn btn-neutral float-right" title="Repositories">Next <span class="icon icon-circle-arrow-right"></span></a>
       
       
-        <a href="../cli/" class="btn btn-neutral" title="CLI"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../assessments/" class="btn btn-neutral" title="Assessments"><span class="icon icon-circle-arrow-left"></span> Previous</a>
       
     </div>
   
@@ -179,10 +214,10 @@
     <span class="rst-current-version" data-toggle="rst-current-version">
       
       
-        <span><a href="../cli/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+        <span><a href="../assessments/" style="color: #fcfcfc;">&laquo; Previous</a></span>
       
       
-        <span style="margin-left: 15px"><a href="../cloud-posture/" style="color: #fcfcfc">Next &raquo;</a></span>
+        <span style="margin-left: 15px"><a href="../git-repos/" style="color: #fcfcfc">Next &raquo;</a></span>
       
     </span>
 </div>
