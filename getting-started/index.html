@@ -60,6 +60,8 @@
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#step-3-run-your-first-assessment">Step 3: Run your first assessment</a>
     </li>
+    <li class="toctree-l2"><a class="reference internal" href="#notes">Notes</a>
+    </li>
     </ul>
                     </li>
                 </ul>
@@ -142,6 +144,37 @@
 <p>Follow the instruction to <a href="https://app.soluble.cloud/cli">install the CLI</a> in the sidebar.</p>
 <p>There are more <a href="/cli">detailed insructions</a> available in the documentation.</p>
 <h3 id="step-3-run-your-first-assessment">Step 3: Run your first assessment</h3>
+<p>Enter a directory containing terraform or cloudformation and run the following:</p>
+<pre><code>$ soluble iac-scan 
+</code></pre>
+<p>This will show some of the assessment tools that are available.</p>
+<pre><code># run checkov:
+soluble iac-scan checkov
+
+# run tfsec:
+soluble iac-scan tfsec
+
+# run cfn-lint:
+soluble iac-scan cfn-python-lint
+
+</code></pre>
+<p>To send the results to Soluble Fusion, add the <code>--upload</code> flag.  For instance:</p>
+<pre><code>$ soluble iac-scan checkov --upload
+...
+</code></pre>
+<p>The output will include a link to the assessment results.</p>
+<h3 id="notes">Notes</h3>
+<p>For tools that depend on a language runtime and installation (i.e. checkov, cfn-lint need python runtime) we use a containerized distribution by default. </p>
+<p>If you don't have docker available or prefer to use the already-installed version of the assesment tool, you can add <code>--tool-path &lt;executable&gt;</code>.</p>
+<p>So to use the locally installed version of cfn-lint:</p>
+<pre><code># To use cfn-lint on your PATH:
+
+soluble iac-scan cfn-lint --tool-path cfn-lint
+
+# Sepecify a specific installation:
+
+soluble iac-scan cfn-lint --tool-path /usr/local/bin/cfn-lint
+</code></pre>
               
             </div>
           </div>
