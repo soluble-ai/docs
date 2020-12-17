@@ -62,13 +62,23 @@
         <ul>
     <li class="toctree-l3"><a class="reference internal" href="#mac-os">Mac OS</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#download-from-soluble-ui">Download from Soluble UI</a>
-    </li>
         </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#linux">Linux</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#windows">Windows</a>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#build-from-source">Build from source</a>
     </li>
-    <li class="toctree-l2"><a class="reference internal" href="#usage">Usage</a>
+    <li class="toctree-l2"><a class="reference internal" href="#build-from-source_1">Build From Source</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#cli-authentication">CLI Authentication</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#integrated-authentication">Integrated Authentication</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#manually-obtianing-access-token">Manually Obtianing Access Token</a>
+    </li>
+        </ul>
     </li>
     </ul>
                     </li>
@@ -130,7 +140,9 @@
             <div class="section">
               
                 <h1 id="cli">CLI</h1>
-<p>This is the optional command line interface (CLI) for interacting with Soluble APIs:</p>
+<p>This is the command line interface (CLI) for interacting with Soluble Fusion.</p>
+<p>It can be used locally to run assessments and manage your account.</p>
+<p>It is used in your CI environment to run assessments and report the results to Soluble Fusion.</p>
 <h2 id="installation">Installation</h2>
 <h3 id="mac-os">Mac OS</h3>
 <p>The easiest way to install the CLI for MacOS is to use <a href="https://brew.sh">homebrew</a>:</p>
@@ -139,42 +151,42 @@
 <p>To upgrade to the latest version:</p>
 <pre><code class="language-bash">brew upgrade soluble-ai/soluble/soluble-cli
 </code></pre>
+<p><em>Note: Due to Apple's notarization requirements, the brew installation builds the CLI from source.  If this is a problem, you can download 
+a precompiled binary from the <a href="https://github.com/soluble-ai/soluble-cli/releases">GitHub Release page</a>.  However, you will have to approve it in Apple Preferences.  We are working on distributing
+an Apple-notarized executable.</em></p>
+<h2 id="linux">Linux</h2>
 <p>On Linux, run:</p>
 <pre><code class="language-bash">curl https://raw.githubusercontent.com/soluble-ai/soluble-cli/master/linux-install.sh | sh
 </code></pre>
-<h3 id="download-from-soluble-ui">Download from Soluble UI</h3>
-<p>Soluble CLI can be installed by running the command provided in the Soluble UI. Click on the <code>CLI</code> in the sidebar.</p>
-<ul>
-<li>Run the command provided there.</li>
-</ul>
-<p>The install will drop the executable in the current directory.  Move it to wherever is convenient.</p>
-<p>Windows executables can be found on the <a href="https://github.com/soluble-ai/soluble-cli/releases">releases page</a>.</p>
+<p>This will install the latest version in the current directory.  You will need to move it to an appropriate location on your <code>PATH</code>.</p>
+<p>Precompiled binaries are also available on the <a href="https://github.com/soluble-ai/soluble-cli/releases">Github Release page</a>.</p>
+<h2 id="windows">Windows</h2>
+<p>Precompiled binaries are available on <a href="https://github.com/soluble-ai/soluble-cli/releases">GitHub Release page</a>.  Please note that our testing on
+Windows is minimal.  Please file a <a href="https://github.com/soluble-ai/soluble-cli/issues">GitHub issue</a> if your run into any problems.</p>
 <h2 id="build-from-source">Build from source</h2>
+<h2 id="build-from-source_1">Build From Source</h2>
 <p>It's possible to build from source.  Assuming you have <a href="https://golang.org/">go</a> installed:</p>
 <pre><code>git checkout https://github.com/soluble-ai/soluble-cli.git
 ./hack/build.sh
 ./soluble version
 </code></pre>
-<h2 id="usage">Usage</h2>
-<p>You'll need to generate an access token from the <a href="https://app.soluble.cloud/admin/tokens/access">UI</a>.  Copy the access token and run:</p>
-<pre><code>$ soluble auth set-access-token --access-token &lt;your-access-token&gt;
-</code></pre>
-<p>OR</p>
+<h2 id="cli-authentication">CLI Authentication</h2>
+<h3 id="integrated-authentication">Integrated Authentication</h3>
+<p>The CLI uses an OAuth flow with your browser to generate an authentication token and configuration.  </p>
 <pre><code>$ soluble login
 </code></pre>
-<p>If successful, the CLI will show your user profile.</p>
-<p>Some useful commands:</p>
-<p>Get help:</p>
-<pre><code>$ soluble help
+<p>This will open a browser window and walk you through the authentication flow.</p>
+<p>If you are running the CLI in an environment that does not have access to a browser (i.e. in SSH or interactive container sesssion) you run 
+the auth process in <em>headless</em> mode, with:</p>
+<pre><code>$ soluble login --headless
 </code></pre>
-<p>List clusters:</p>
-<pre><code>$ soluble cluster list
-</code></pre>
-<p>List available queries:</p>
-<pre><code>$ soluble query list
-</code></pre>
-<p>Run a query named <code>deployments</code></p>
-<pre><code class="language-bash">$ soluble query run --query-name deployments
+<p>This will give you a link to copy/paste into your browser.  When you have completed the authentication flow, you will copy/paste the authentication
+code back to the CLI to complete the authentication flow.</p>
+<h3 id="manually-obtianing-access-token">Manually Obtianing Access Token</h3>
+<p>If you run into problems with the procedure above, you can obtian an access token manaully.</p>
+<p>Log in to the UI and go to <a href="https://app.soluble.cloud/admin/tokens/access">Access Tokens</a>.  </p>
+<p>Generate an access token and then run:</p>
+<pre><code>$ soluble auth set-access-token --access-token &lt;your-access-token&gt;
 </code></pre>
               
             </div>
