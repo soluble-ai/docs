@@ -9,7 +9,7 @@
   
   
   <link rel="shortcut icon" href="../img/favicon.ico">
-  <title>Soluble Basics - Soluble Fusion Docs</title>
+  <title>Reference - Soluble Fusion Docs</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700" />
 
   <link rel="stylesheet" href="../css/theme.css" />
@@ -18,8 +18,8 @@
   
   <script>
     // Current page data
-    var mkdocs_page_name = "Soluble Basics";
-    var mkdocs_page_input_path = "basics.md";
+    var mkdocs_page_name = "Reference";
+    var mkdocs_page_input_path = "reference.md";
     var mkdocs_page_url = null;
   </script>
   
@@ -63,8 +63,12 @@
                     <li class="toctree-l1"><a class="reference internal" href="../cli/">CLI</a>
                     </li>
                 </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../integration/">Integrations</a>
+                    </li>
+                </ul>
                 <ul class="current">
-                    <li class="toctree-l1 current"><a class="reference internal current" href="./">Soluble Basics</a>
+                    <li class="toctree-l1 current"><a class="reference internal current" href="./">Reference</a>
     <ul class="current">
     <li class="toctree-l2"><a class="reference internal" href="#user-management">User Management</a>
         <ul>
@@ -100,6 +104,14 @@
     </li>
         </ul>
     </li>
+    <li class="toctree-l2"><a class="reference internal" href="#config">Config</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#ignore-files">Ignore Files</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#finding-suppressions">Finding Suppressions</a>
+    </li>
+        </ul>
+    </li>
     </ul>
                     </li>
                 </ul>
@@ -124,7 +136,7 @@
     
       
     
-    <li>Soluble Basics</li>
+    <li>Reference</li>
     <li class="wy-breadcrumbs-aside">
       
     </li>
@@ -135,7 +147,7 @@
           <div role="main">
             <div class="section">
               
-                <h1 id="soluble-basics">Soluble Basics</h1>
+                <h1 id="reference">Reference</h1>
 <h2 id="user-management">User Management</h2>
 <p>Every user signed up for Soluble is tied to an organization. The first user from the organization sets up an account and has the ability to invite other people to his organization and can be assigned a role ( <code>Owner</code>, <code>Write</code> and <code>Read</code> ). Each invited user will be part of the organization they are invited to and they can also join a default organization of his own, so they can explore Soluble on their own.</p>
 <h4 id="invite-user">Invite user</h4>
@@ -243,6 +255,23 @@
 <p><img alt="SSH Page" src="../img/aws-config.png" /></p>
 </li>
 </ol>
+<h2 id="config">Config</h2>
+<p>Each git repository can have a configuration file named <code>.soluble/config.yml</code> in the root of the repository.
+This file is sent along with the asessments and can control how Soluble Fusion behaves.</p>
+<h3 id="ignore-files">Ignore Files</h3>
+<p>The <code>ignore</code> directive takes a list of strings, which are interpreted using <a href="https://git-scm.com/docs/gitignore">gitignore</a> syntax.</p>
+<p>Example:</p>
+<pre><code class="language-yaml">ignore:
+  - &quot;test/**&quot;
+  - &quot;some-other-file&quot;
+</code></pre>
+<h3 id="finding-suppressions">Finding Suppressions</h3>
+<p>The <code>suppress</code> directive takes a list of strings that are matched against the <code>sid</code> for a particular finding.</p>
+<pre><code>suppress:
+  - &quot;sid-1&quot;
+  - &quot;sid-2&quot;
+</code></pre>
+<p>Note that you can also suppress findings from the UI.</p>
               
             </div>
           </div>
@@ -251,7 +280,7 @@
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
       
-        <a href="../cli/" class="btn btn-neutral" title="CLI"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../integration/" class="btn btn-neutral" title="Integrations"><span class="icon icon-circle-arrow-left"></span> Previous</a>
       
     </div>
   
@@ -277,7 +306,7 @@
     <span class="rst-current-version" data-toggle="rst-current-version">
       
       
-        <span><a href="../cli/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+        <span><a href="../integration/" style="color: #fcfcfc;">&laquo; Previous</a></span>
       
       
     </span>

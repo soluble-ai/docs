@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  
+  <link rel="shortcut icon" href="../img/favicon.ico">
+  <title>Integrations - Soluble Fusion Docs</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700" />
+
+  <link rel="stylesheet" href="../css/theme.css" />
+  <link rel="stylesheet" href="../css/theme_extra.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" />
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "Integrations";
+    var mkdocs_page_input_path = "integration.md";
+    var mkdocs_page_url = null;
+  </script>
+  
+  <script src="../js/jquery-2.1.1.min.js" defer></script>
+  <script src="../js/modernizr-2.8.3.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+        <a href=".." class="icon icon-home"> Soluble Fusion Docs</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="..">Home</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../getting-started/">Getting Started</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../assessments/">Security Assessments</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../cli/">CLI</a>
+                    </li>
+                </ul>
+                <ul class="current">
+                    <li class="toctree-l1 current"><a class="reference internal current" href="./">Integrations</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#ci">CI</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#github-actions">GitHub Actions</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#circle-ci-jenkins-gitlabl-buildkite-tekton-etc">Circle CI, Jenkins, GitLabl, Buildkite, Tekton etc.</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#source-control">Source Control</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#github">GitHub</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#soluble-github-app">Soluble GitHub App</a>
+    </li>
+        </ul>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#slack">Slack</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#aws">AWS</a>
+    </li>
+    </ul>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../reference/">Reference</a>
+                    </li>
+                </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="..">Soluble Fusion Docs</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="..">Docs</a> &raquo;</li>
+    
+      
+    
+    <li>Integrations</li>
+    <li class="wy-breadcrumbs-aside">
+      
+    </li>
+  </ul>
+  
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="integrations">Integrations</h1>
+<h2 id="ci">CI</h2>
+<p>To install <code>soluble</code> in your CI environment, use the following command, which can be specified as a build step.</p>
+<p><code>curl -sL https://raw.githubusercontent.com/soluble-ai/soluble-cli/master/linux-install.sh | sh</code></p>
+<p>The CLI will be installed in the current directory with the execute bit set.  You are welcome to move it somewhere else, but leaving it
+in the current directory works well with all of the modern CI platforms.</p>
+<p>The following is an example for Circle CI:</p>
+<pre><code class="language-yaml">version: 2.1
+
+workflows:
+  workflow:
+    jobs:
+      - build:
+          context: my-env-context
+
+jobs:
+  build:
+    machine:
+      image: ubuntu-1604:202010-01
+    steps:
+      - checkout
+      - run: &quot;curl -sL https://raw.githubusercontent.com/soluble-ai/soluble-cli/master/linux-install.sh | sh&quot;
+      - run: &quot;soluble tf-scan tfsec --upload&quot;
+      - run: &quot;soluble tf-scan checkov  --upload&quot;
+      - run: &quot;soluble secrets-scan --upload&quot;
+</code></pre>
+<p>In order to communicate with the Soluble Fusion platform, the CLI needs an API token, which it expects to find in 
+<code>~/.soluble/cli-config.json</code>.  The file will typically look something like this:</p>
+<pre><code class="language-json">{
+  &quot;Profiles&quot;: {
+    &quot;default&quot;: {
+      &quot;APIServer&quot;: &quot;https://api.soluble.cloud&quot;,
+      &quot;APIToken&quot;: &quot;&lt;SOLUBLE_API_TOKEN&gt;&quot;,
+      &quot;TLSNoVerify&quot;: false,
+      &quot;Organization&quot;: &quot;&lt;SOLUBLE_ORG_ID&gt;&quot;,
+      &quot;Email&quot;: &quot;email@example.com&quot;,
+      &quot;DefaultClusterID&quot;: &quot;&quot;
+    }
+  },
+  &quot;CurrentProfile&quot;: &quot;default&quot;,
+  &quot;ModelLocations&quot;: null
+}
+</code></pre>
+<p>You have two choices to configure this:</p>
+<p>1) Set <code>SOLUBLE_API_TOKEN</code> and <code>SOLUBLE_ORG_ID</code> as secrets in your CI platform.  When you run the installation <code>curl</code> command above, <code>~/.soluble/cli-config.json</code> will be 
+configured automatically.  In the example above, with Circle CI, these values were stored in a <a href="https://circleci.com/docs/2.0/env-vars/#setting-an-environment-variable-in-a-context">Context</a> named <code>my-env-context</code>.  </p>
+<p>If you are using GitHub Actions, you can use <a href="https://docs.github.com/en/actions/reference/encrypted-secrets">GitHub Secrets</a>.</p>
+<p>There is no magic here.  When the CLI is installed, it just uses these values to write its configuration file.</p>
+<p>or</p>
+<p>2) If you want to handle this yourself, just make sure that <code>cli-config.json</code> is distributed and placed in <code>~/.soluble/cli-config.json</code> using your preferred mechanism for this kind of thing.</p>
+<h3 id="github-actions">GitHub Actions</h3>
+<p>We have some first-class support for GitHub Actions.  Contact us for details.</p>
+<h3 id="circle-ci-jenkins-gitlabl-buildkite-tekton-etc">Circle CI, Jenkins, GitLabl, Buildkite, Tekton etc.</h3>
+<p>The instructions above should be sufficient in most cases. </p>
+<p>The Soluble CLI will extract the CI platform-specific environment variables for relevant contextual data (Git commit, Git branch, CI pipeline name, etc) and send that metadata to the Fusion platform.</p>
+<p>If you are interested in a Circle CI Orb or other first-class support for CI integration, let us know.</p>
+<h2 id="source-control">Source Control</h2>
+<h3 id="github">GitHub</h3>
+<p>If you have the official <a href="https://github.com/cli/cli">GitHub CLI</a> installed and configured on your machine, you can use its credentials to crawl all of the 
+repos available to you. </p>
+<p>It will clone each of the available repos, identifiy where there IaC in those repos and send that metadata back to Soluble.</p>
+<pre><code>soluble inventory github
+</code></pre>
+<p>If you aren't using GitHub or don't have that capability available to you, you can run the inventory on a repo-by-repo basis by running the following from a cloned
+git repo:</p>
+<pre><code>soluble inventory local
+</code></pre>
+<h4 id="soluble-github-app">Soluble GitHub App</h4>
+<p>We have a GitHub App available for use.  This delegates limited access and allows the Soluble CLI to post PR status checks and annoations onto your PRs.</p>
+<h2 id="slack">Slack</h2>
+<p>We have a Slack app that can be used to push notifications and interact with the Soluble platform.</p>
+<p>This can be configured from the <a href="https://app.soluble.cloud/integrations">Integrations Page</a>.</p>
+<h2 id="aws">AWS</h2>
+<p>You can delegate IAM permissions with the Security Audit role in order to enable security configuration checks to be run against your AWS accounts.</p>
+<p>This can be configured from the <a href="https://app.soluble.com/integrations">Integrations Page</a></p>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../reference/" class="btn btn-neutral float-right" title="Reference">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../cli/" class="btn btn-neutral" title="CLI"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+      
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+      
+        <span><a href="../cli/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../reference/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+    <script>var base_url = '..';</script>
+    <script src="../js/theme.js" defer></script>
+      <script src="../search/main.js" defer></script>
+    <script defer>
+        window.onload = function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        };
+    </script>
+
+</body>
+</html>
