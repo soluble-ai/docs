@@ -108,7 +108,7 @@
         <ul>
     <li class="toctree-l3"><a class="reference internal" href="#ignore-files">Ignore Files</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#finding-suppressions">Finding Suppressions</a>
+    <li class="toctree-l3"><a class="reference internal" href="#suppress-findings">Suppress Findings</a>
     </li>
         </ul>
     </li>
@@ -258,20 +258,23 @@
 <h2 id="config">Config</h2>
 <p>Each git repository can have a configuration file named <code>.soluble/config.yml</code> in the root of the repository.
 This file is sent along with the asessments and can control how Soluble Fusion behaves.</p>
+<p>The following describes the configuration options available in this file:</p>
 <h3 id="ignore-files">Ignore Files</h3>
 <p>The <code>ignore</code> directive takes a list of strings, which are interpreted using <a href="https://git-scm.com/docs/gitignore">gitignore</a> syntax.</p>
 <p>Example:</p>
-<pre><code class="language-yaml">ignore:
+<pre><code>ignore:
   - &quot;test/**&quot;
   - &quot;some-other-file&quot;
 </code></pre>
-<h3 id="finding-suppressions">Finding Suppressions</h3>
+<p><em>Note: Currently this directive only applies to assessments uploaded to Soluble Fusion.  The <code>ignore</code> directive will not be applied to local CLI output.</em></p>
+<h3 id="suppress-findings">Suppress Findings</h3>
 <p>The <code>suppress</code> directive takes a list of strings that are matched against the <code>sid</code> for a particular finding.</p>
 <pre><code>suppress:
   - &quot;sid-1&quot;
   - &quot;sid-2&quot;
 </code></pre>
 <p>Note that you can also suppress findings from the UI.</p>
+<p><em>Note: Currently this directive only applies to assessments uploaded to Soluble Fusion.  The <code>suppress</code> directive will not be applied to local CLI output.</em></p>
               
             </div>
           </div>
