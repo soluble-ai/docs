@@ -195,7 +195,15 @@ git repo:</p>
 <pre><code>soluble inventory local
 </code></pre>
 <h4 id="soluble-github-app">Soluble GitHub App</h4>
-<p>We have a GitHub App available for use.  This delegates limited access and allows the Soluble CLI to post PR status checks and annoations onto your PRs.</p>
+<p>We provide a GitHub App that can be installed to your GitHub organization.  This app allows the CLI to post status checks to GitHub PRs from CI.</p>
+<p>To in install the app:</p>
+<ol>
+<li>Log in to Soluble</li>
+<li>Go to <a href="https://github.com/apps/soluble-fusion">https://github.com/apps/soluble-fusion</a> and follow the instructions</li>
+</ol>
+<p>Once installed you can add <code>soluble build update-pr</code> to your CI job that performs the assessments.  The CLI will obtain an ephemeral token, and post status checks to the GitHub pull request,
+if one exists. </p>
+<p>Note: This GitHub app does not have access to the code in your repositories.</p>
 <h2 id="slack">Slack</h2>
 <p>We have a Slack app that can be used to push notifications and interact with the Soluble platform.</p>
 <p>This can be configured from the <a href="https://app.soluble.cloud/integrations">Integrations Page</a>.</p>
