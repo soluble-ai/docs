@@ -60,8 +60,6 @@
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#step-3-run-your-first-assessment">Step 3: Run your first assessment</a>
     </li>
-    <li class="toctree-l2"><a class="reference internal" href="#notes">Notes</a>
-    </li>
     </ul>
                     </li>
                 </ul>
@@ -71,6 +69,10 @@
                 </ul>
                 <ul>
                     <li class="toctree-l1"><a class="reference internal" href="../cli/">CLI</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../ci/">CI/CD Integration</a>
                     </li>
                 </ul>
                 <ul>
@@ -114,7 +116,7 @@
             <div class="section">
               
                 <h1 id="getting-started">Getting Started</h1>
-<h3 id="step-1-log-in-to-soluble-fusion">Step 1: Log In To Soluble Fusion</h3>
+<h2 id="step-1-log-in-to-soluble-fusion">Step 1: Log In To Soluble Fusion</h2>
 <p>This is fast and simple, using OpenID Connect.</p>
 <ul>
 <li>
@@ -128,10 +130,10 @@
 <li>Agree to Terms of Service</li>
 <li>Done!</li>
 </ul>
-<h3 id="step-2-install-the-cli">Step 2: Install the CLI</h3>
+<h2 id="step-2-install-the-cli">Step 2: Install the CLI</h2>
 <p>Follow the instruction to <a href="https://app.soluble.cloud/cli">install the CLI</a> in the sidebar.</p>
 <p>There are more <a href="/cli">detailed insructions</a> available in the documentation.</p>
-<h3 id="step-3-run-your-first-assessment">Step 3: Run your first assessment</h3>
+<h2 id="step-3-run-your-first-assessment">Step 3: Run your first assessment</h2>
 <p>Enter a directory containing terraform, CloudFormation or Kubernetes manifests and run one of the following:</p>
 <pre><code># Terraform
 $ soluble tf-scan
@@ -141,40 +143,50 @@ $ soluble cfn-scan
 
 # Kubernetes
 $ soluble k8s-scan
-</code></pre>
-<p>At present the scanners that are available for use are:</p>
-<p>For Terraform:</p>
-<ul>
-<li>checkov - <code>soluble tf-scan checkov</code></li>
-<li>tfsec - <code>soluble tf-scan tfsec</code></li>
-<li>terrascan - <code>soluble tf-scan tfsec</code></li>
-</ul>
-<p>For CloudFormation:</p>
-<ul>
-<li>cfn-nag - <code>soluble cfn-scan cfn-nag</code></li>
-<li>cfn-python-lint - <code>soluble cfn-scan cfn-python-lint</code></li>
-<li>checkov - <code>soluble cfn-scan checkov</code></li>
-</ul>
-<p>For Kubernetes:
-* checkov - <code>soluble k8s-scan checkov</code></p>
-<p><em>Note: If you are interested in seeing other assessment tools, let us know at support@soluble.ai</em></p>
-<p>To send the results to Soluble Fusion, add the <code>--upload</code> flag.  For instance:</p>
-<pre><code>$ soluble tf-scan --upload
-...
-</code></pre>
-<p>The output will include a link to the assessment results.</p>
-<h3 id="notes">Notes</h3>
-<p>For tools that depend on a language runtime and installation (i.e. checkov, cfn-lint need python runtime) we use a containerized distribution by default. </p>
-<p>If you don't have docker available or prefer to use the already-installed version of the assesment tool, you can add <code>--tool-path &lt;executable&gt;</code>.</p>
-<p>So to use the locally installed version of cfn-lint:</p>
-<pre><code># To use cfn-lint on your PATH:
 
-soluble tf-scan tfsec --tool-path tfsec
+At present the scanners that are available for use are:
 
-# Sepecify a specific installation:
+For Terraform:
 
-soluble tf-scan tfsec --tool-path /usr/local/bin/tfsec
+* checkov - `soluble tf-scan checkov`
+* tfsec - `soluble tf-scan tfsec`
+* terrascan - `soluble tf-scan tfsec`
+
+For CloudFormation:
+
+* cfn-nag - `soluble cfn-scan cfn-nag`
+* cfn-python-lint - `soluble cfn-scan cfn-python-lint`
+* checkov - `soluble cfn-scan checkov`
+
+For Kubernetes:
+
+* checkov - `soluble k8s-scan checkov`
+
+_Note: If you are interested in seeing other assessment tools, let us know at support@soluble.ai_
+
+
+To send the results to Soluble Fusion, add the `--upload` flag.  For instance:
+
 </code></pre>
+<p>$ soluble tf-scan --upload
+...</p>
+<pre><code>
+The output will include a link to the assessment results.
+
+### Notes
+
+For tools that depend on a language runtime and installation (i.e. checkov, cfn-lint need python runtime) we use a containerized distribution by default. 
+
+If you don't have docker available or prefer to use the already-installed version of the assesment tool, you can add `--tool-path &lt;executable&gt;`.
+
+So to use the locally installed version of checkov:
+
+</code></pre>
+<h1 id="to-use-checkov-on-your-path">To use checkov on your PATH:</h1>
+<p>soluble tf-scan checkov --tool-path checkov</p>
+<h1 id="sepecify-a-specific-installation">Sepecify a specific installation:</h1>
+<p>soluble tf-scan checkov --tool-path /usr/local/bin/checkov
+```</p>
               
             </div>
           </div>
