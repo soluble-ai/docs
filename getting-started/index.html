@@ -132,22 +132,34 @@
 <p>Follow the instruction to <a href="https://app.soluble.cloud/cli">install the CLI</a> in the sidebar.</p>
 <p>There are more <a href="/cli">detailed insructions</a> available in the documentation.</p>
 <h3 id="step-3-run-your-first-assessment">Step 3: Run your first assessment</h3>
-<p>Enter a directory containing terraform or cloudformation and run the following:</p>
-<pre><code>$ soluble iac-scan 
+<p>Enter a directory containing terraform, CloudFormation or Kubernetes manifests and run one of the following:</p>
+<pre><code># Terraform
+$ soluble tf-scan
+
+# CloudFormation
+$ soluble cfn-scan
+
+# Kubernetes
+$ soluble k8s-scan
 </code></pre>
-<p>This will show some of the assessment tools that are available.</p>
-<pre><code># run checkov:
-soluble iac-scan checkov
-
-# run tfsec:
-soluble iac-scan tfsec
-
-# run cfn-lint:
-soluble iac-scan cfn-python-lint
-
-</code></pre>
+<p>At present the scanners that are available for use are:</p>
+<p>For Terraform:</p>
+<ul>
+<li>checkov - <code>soluble tf-scan checkov</code></li>
+<li>tfsec - <code>soluble tf-scan tfsec</code></li>
+<li>terrascan - <code>soluble tf-scan tfsec</code></li>
+</ul>
+<p>For CloudFormation:</p>
+<ul>
+<li>cfn-nag - <code>soluble cfn-scan cfn-nag</code></li>
+<li>cfn-python-lint - <code>soluble cfn-scan cfn-python-lint</code></li>
+<li>checkov - <code>soluble cfn-scan checkov</code></li>
+</ul>
+<p>For Kubernetes:
+* checkov - <code>soluble k8s-scan checkov</code></p>
+<p><em>Note: If you are interested in seeing other assessment tools, let us know at support@soluble.ai</em></p>
 <p>To send the results to Soluble Fusion, add the <code>--upload</code> flag.  For instance:</p>
-<pre><code>$ soluble iac-scan checkov --upload
+<pre><code>$ soluble tf-scan --upload
 ...
 </code></pre>
 <p>The output will include a link to the assessment results.</p>
@@ -157,11 +169,11 @@ soluble iac-scan cfn-python-lint
 <p>So to use the locally installed version of cfn-lint:</p>
 <pre><code># To use cfn-lint on your PATH:
 
-soluble iac-scan cfn-lint --tool-path cfn-lint
+soluble tf-scan tfsec --tool-path tfsec
 
 # Sepecify a specific installation:
 
-soluble iac-scan cfn-lint --tool-path /usr/local/bin/cfn-lint
+soluble tf-scan tfsec --tool-path /usr/local/bin/tfsec
 </code></pre>
               
             </div>
