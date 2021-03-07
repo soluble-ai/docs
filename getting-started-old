@@ -1,0 +1,91 @@
+# Getting Started
+
+This 2-minute video will walk you through the steps below.  It demonstrates how to run your first security asssessment on a Terraform
+source tree.
+
+<video width="640" height="480" controls>
+  <source src="https://storage.googleapis.com/soluble-public-content/videos/get-started.mp4" type="video/mp4">
+Your browser does not support the video tag.
+</video>
+
+## Step 1: Log In To Soluble Fusion
+
+This is fast and simple using your Google or GitHub account:
+
+-  Open a browser to [https://app.soluble.cloud](https://app.soluble.cloud)
+
+-  Click [Create Account](https://app.soluble.cloud/register)
+-  Select Google or GitHub indentity providers _(let us know if you'd like to see other identity providers)_
+-  Select your account
+-  Agree to Terms of Service
+-  Done!
+
+
+## Step 2: Install the CLI
+
+Follow the instruction to [install the CLI](https://app.soluble.cloud/cli) in the sidebar.
+
+There are more [detailed insructions](/cli) available in the documentation.
+
+## Step 3: Run your first assessment
+
+Enter a directory containing terraform, CloudFormation or Kubernetes manifests and run one of the following:
+
+
+```
+# Terraform
+$ soluble tf-scan
+
+# CloudFormation
+$ soluble cfn-scan
+
+# Kubernetes
+$ soluble k8s-scan
+
+At present the scanners that are available for use are:
+
+For Terraform:
+
+* checkov - `soluble tf-scan checkov`
+* tfsec - `soluble tf-scan tfsec`
+* terrascan - `soluble tf-scan tfsec`
+
+For CloudFormation:
+
+* cfn-nag - `soluble cfn-scan cfn-nag`
+* cfn-python-lint - `soluble cfn-scan cfn-python-lint`
+* checkov - `soluble cfn-scan checkov`
+
+For Kubernetes:
+
+* checkov - `soluble k8s-scan checkov`
+
+_Note: If you are interested in seeing other assessment tools, let us know at support@soluble.ai_
+
+
+To send the results to Soluble Fusion, add the `--upload` flag.  For instance:
+
+```
+$ soluble tf-scan --upload
+...
+```
+
+The output will include a link to the assessment results.
+
+### Notes
+
+For tools that depend on a language runtime and installation (i.e. checkov, cfn-lint need python runtime) we use a containerized distribution by default. 
+
+If you don't have docker available or prefer to use the already-installed version of the assesment tool, you can add `--tool-path <executable>`.
+
+So to use the locally installed version of checkov:
+
+```
+# To use checkov on your PATH:
+
+soluble tf-scan checkov --tool-path checkov
+
+# Sepecify a specific installation:
+
+soluble tf-scan checkov --tool-path /usr/local/bin/checkov
+```

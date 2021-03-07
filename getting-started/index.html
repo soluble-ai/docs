@@ -54,11 +54,49 @@
                 <ul class="current">
                     <li class="toctree-l1 current"><a class="reference internal current" href="./">Getting Started</a>
     <ul class="current">
-    <li class="toctree-l2"><a class="reference internal" href="#step-1-log-in-to-soluble-fusion">Step 1: Log In To Soluble Fusion</a>
+    <li class="toctree-l2"><a class="reference internal" href="#account-setup">Account Setup</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#sign-in-choose-identity-provider">Sign In &amp; Choose Identity Provider</a>
     </li>
-    <li class="toctree-l2"><a class="reference internal" href="#step-2-install-the-cli">Step 2: Install the CLI</a>
+    <li class="toctree-l3"><a class="reference internal" href="#identity-provider-login">Identity Provider Login</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#google">Google</a>
     </li>
-    <li class="toctree-l2"><a class="reference internal" href="#step-3-run-your-first-assessment">Step 3: Run your first assessment</a>
+    <li class="toctree-l4"><a class="reference internal" href="#github">GitHub</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#accept-terms-of-service">Accept Terms of Service</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#account-created">Account Created</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#automated-assessments-zodiac">Automated Assessments - Zodiac</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#kubernetes">Kubernetes</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#install-zodiac-on-kubernetes">Install Zodiac on Kubernetes</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#install-zodiac-on-linux-via-k3s">Install Zodiac on Linux via K3S</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#install-zodiac-on-docker-via-k3d">Install Zodiac on Docker via K3D</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#install-zodiac">Install Zodiac</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#configure-zodiac">Configure Zodiac</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#github_1">GitHub</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#gitlab">GitLab</a>
+    </li>
+        </ul>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#manual-assessments-cli">Manual Assessments - CLI</a>
     </li>
     </ul>
                     </li>
@@ -116,84 +154,102 @@
             <div class="section">
               
                 <h1 id="getting-started">Getting Started</h1>
-<p>This 2-minute video will walk you through the steps below.  It demonstrates how to run your first security asssessment on a Terraform
-source tree.</p>
-<video width="640" height="480" controls>
-  <source src="https://storage.googleapis.com/soluble-public-content/videos/get-started.mp4" type="video/mp4">
-Your browser does not support the video tag.
-</video>
-
-<h2 id="step-1-log-in-to-soluble-fusion">Step 1: Log In To Soluble Fusion</h2>
-<p>This is fast and simple using your Google or GitHub account:</p>
+<h2 id="account-setup">Account Setup</h2>
+<h3 id="sign-in-choose-identity-provider">Sign In &amp; Choose Identity Provider</h3>
+<p>Open a browser to <a href="https://app.soluble.cloud/register">https://app.soluble.cloud/register</a></p>
+<p><img alt="Create Account" src="../img/gs-1-create-account.png" /></p>
+<h3 id="identity-provider-login">Identity Provider Login</h3>
+<h4 id="google">Google</h4>
+<p>If you are using Google, choose your google account:</p>
+<p><img alt="Choose Account" src="../img/gs-2-google.png" /></p>
+<h4 id="github">GitHub</h4>
+<p>If you are using GitHub as your identity provider, authenticate with github.  </p>
+<p>_ NOTE: We are NOT requesting access to your source code! _</p>
+<p><img alt="Choose Account" src="../img/gs-2-github.png" /></p>
+<h3 id="accept-terms-of-service">Accept Terms of Service</h3>
+<p><img alt="Terms Of Service" src="../img/gs-3-tos.png" /></p>
+<h3 id="account-created">Account Created</h3>
+<p><img alt="Dashbaord" src="../img/gs-4-dashboard.png" /></p>
+<h2 id="automated-assessments-zodiac">Automated Assessments - Zodiac</h2>
+<p>Soluble Fusion provides an orchestration engine called Zodiac that runs in your environment and continuously scans your git repositories for security issues.</p>
+<p>Zodiac runs as a kubernetes operator.</p>
+<p>If you don't use kubernetes, Zodiac can be installed quite easily on Linux / Mac / Windows with <a href="https://k3s.io">k3s</a> or <a href="https://k3d.io">k3d</a> + <a href="https://docker.com">Docker</a>.</p>
+<p>Zodiac is stateless, so you won't lose any data if it is terminated or if the cluster is running in is terminated.</p>
+<h3 id="kubernetes">Kubernetes</h3>
+<h4 id="install-zodiac-on-kubernetes">Install Zodiac on Kubernetes</h4>
+<p>If you plan to install zodiac into EKS, GKE, AKS or another kubernetes environment,  skip ahead to <a href="#install-zodiac">install zodiac</a></p>
+<h4 id="install-zodiac-on-linux-via-k3s">Install Zodiac on Linux via K3S</h4>
+<p>If you have access to a Linux host, but don't have easy access to a kubernetes cluster, <a href="https://k3s.io">k3s.io</a> is the easiest way to bootstrap a functioning single-node environment.</p>
+<p>Zodiac does not need to be accessible or publicly avaialble in any way. </p>
+<p>Just follow the instructions on the <a href="https://k3s.io">k3s.io site</a>.</p>
+<p><img alt="K3S Install" src="../img/gs-k3s.png" /></p>
+<p>Once your cluster is up and running, proceed to <a href="#install-zodiac">install zodiac</a>.</p>
+<h4 id="install-zodiac-on-docker-via-k3d">Install Zodiac on Docker via K3D</h4>
+<p>If you don't have convenient access to a kubernetes cluster or Linux host, or if you just want to deploy zodiac in your local environment, we reccommend using <a href="https://k3d.io">k3d</a>.</p>
+<p>K3D is a lightweight derivative of <a href="https://k3s.io/">k3s</a> that runs easily on top of Docker.</p>
+<p>We find that <a href="https://k3d.io/">k3d</a> is the simplest and fastest way to maintain a kubernetes cluster in your dev
+environment  You can create and re-create an entire functional kubernetes cluster in just a few seconds.  </p>
+<p>You can also use <a href="https://kind.sigs.k8s.io/docs/user/quick-start/">KIND</a> or <a href="https://docs.docker.com/docker-for-mac/kubernetes/">Docker Desktop's Kubernetes distribution</a>, but k3d is much faster and easier to use.</p>
+<p>Installation instructions are here: <a href="https://k3d.io/#installation">https://k3d.io/#installation</a></p>
+<p>Once you have k3d itself installed, just run <code>k3d cluster create</code> and in a few seconds you'll have a functioning kubernetes cluster.</p>
+<p><img alt="K3D Cluster Create" src="../img/gs-k3d-cluster-create.png" /></p>
+<p>Once your kubernetes cluster is working, continue to <a href="#install-zodiac">Install Zodiac</a></p>
+<h3 id="install-zodiac">Install Zodiac</h3>
+<p>In the Soluble app, go to <a href="https://app.soluble.cloud/add-zodiac">https://app.soluble.cloud/add-zodiac</a> and 
+click the downlod manifest button.</p>
+<p><img alt="Download Manifest" src="../img/gs-download-manifest.png" /></p>
+<p>This will download a kubernetes manifest bundle.  You can review this if you like before applying it to your cluster.</p>
+<p>The manifest bundle contains:</p>
 <ul>
-<li>
-<p>Open a browser to <a href="https://app.soluble.cloud">https://app.soluble.cloud</a></p>
-</li>
-<li>
-<p>Click <a href="https://app.soluble.cloud/register">Create Account</a></p>
-</li>
-<li>Select Google or GitHub indentity providers <em>(let us know if you'd like to see other identity providers)</em></li>
-<li>Select your account</li>
-<li>Agree to Terms of Service</li>
-<li>Done!</li>
+<li><code>namespace</code> named <code>soluble</code> in which everything will run</li>
+<li><code>serviceaccount</code> for the <code>zodiac</code> pods, which has control over the <code>soluble</code> namespace</li>
+<li><code>secret</code> named <code>zodiac-config</code> </li>
+<li><code>deployment</code> for the zodiac operator</li>
+<li><code>service</code> for the zodiac operator (not strictly required)</li>
+<li>a few other odds and ends to tie this all together</li>
 </ul>
-<h2 id="step-2-install-the-cli">Step 2: Install the CLI</h2>
-<p>Follow the instruction to <a href="https://app.soluble.cloud/cli">install the CLI</a> in the sidebar.</p>
-<p>There are more <a href="/cli">detailed insructions</a> available in the documentation.</p>
-<h2 id="step-3-run-your-first-assessment">Step 3: Run your first assessment</h2>
-<p>Enter a directory containing terraform, CloudFormation or Kubernetes manifests and run one of the following:</p>
-<pre><code># Terraform
-$ soluble tf-scan
-
-# CloudFormation
-$ soluble cfn-scan
-
-# Kubernetes
-$ soluble k8s-scan
-
-At present the scanners that are available for use are:
-
-For Terraform:
-
-* checkov - `soluble tf-scan checkov`
-* tfsec - `soluble tf-scan tfsec`
-* terrascan - `soluble tf-scan tfsec`
-
-For CloudFormation:
-
-* cfn-nag - `soluble cfn-scan cfn-nag`
-* cfn-python-lint - `soluble cfn-scan cfn-python-lint`
-* checkov - `soluble cfn-scan checkov`
-
-For Kubernetes:
-
-* checkov - `soluble k8s-scan checkov`
-
-_Note: If you are interested in seeing other assessment tools, let us know at support@soluble.ai_
-
-
-To send the results to Soluble Fusion, add the `--upload` flag.  For instance:
-
+<p>Apply it to your cluster with <code>kubectl apply -f zodiac.yaml</code>:</p>
+<p><img alt="kubectl apply" src="../img/gs-kubectl-apply-zodiac.png" /></p>
+<p>In a minute or two, you should see the Deployment up and ready.</p>
+<p>You can check with <code>kubectl get deployments -n soluble</code>:</p>
+<p><img alt="Zodiac Ready" src="../img/gs-zodiac-ready.png" /></p>
+<p>If zodiac can't communicate with the Soluble Fusion SaaS platform, it will enter a crash loop.</p>
+<h3 id="configure-zodiac">Configure Zodiac</h3>
+<p>Zodiac needs credentials to be able to communicate with your Git hosting provider.  These are configured
+in Kubernetes because we don't want access to your source code.</p>
+<h4 id="github_1">GitHub</h4>
+<p>The easiest way to get credentials to Zodiac is to transfer them from GitHub's CLI.</p>
+<p>If you don't have the CLI installed, head to <a href="https://cli.github.com">https://cli.github.com</a> and check it out.</p>
+<p><img alt="CLI" src="../img/gs-install-gh-cli.png" /></p>
+<p>Once you have it configured, verify that you can use it to access your repos with <code>gh repo list</code> and <code>gh repo clone</code>.</p>
+<p>The GitHub CLI stores the OAuth token in <code>${HOME}/.config/gh/hosts.yml</code>.</p>
+<p>The format of the file is as follows.  If you don't want to use the GitHub CLI to create it you can do so manually.</p>
+<pre><code>github.com:
+    user: &lt;your-github-username&gt;
+    oauth_token: &lt;oauth-token&gt;
 </code></pre>
-<p>$ soluble tf-scan --upload
-...</p>
-<pre><code>
-The output will include a link to the assessment results.
-
-### Notes
-
-For tools that depend on a language runtime and installation (i.e. checkov, cfn-lint need python runtime) we use a containerized distribution by default. 
-
-If you don't have docker available or prefer to use the already-installed version of the assesment tool, you can add `--tool-path &lt;executable&gt;`.
-
-So to use the locally installed version of checkov:
-
+<p>Now that we have the file containing credentials, we can transfer it to kubernetes as a secret that Zodiac can read.  Do this with:</p>
+<pre><code>kubectl create secret generic git-providers --from-file=${HOME}/.config/gh/hosts.yml --namespace soluble
+secret/git-providers created
 </code></pre>
-<h1 id="to-use-checkov-on-your-path">To use checkov on your PATH:</h1>
-<p>soluble tf-scan checkov --tool-path checkov</p>
-<h1 id="sepecify-a-specific-installation">Sepecify a specific installation:</h1>
-<p>soluble tf-scan checkov --tool-path /usr/local/bin/checkov
-```</p>
+<p>Zodiac will notice this change and connect to the provider and start scanning your repos.</p>
+<h4 id="gitlab">GitLab</h4>
+<p>Zodiac uses the GitHub file format for gitlab as well.</p>
+<p>Just add the following.  Note that the <code>provider</code> attribute is optional if the hostname is <code>githab.com</code>.</p>
+<pre><code class="language-yaml">gitlab.com:
+    user: &lt;gitlab-username&gt;
+    token: &lt;api-token&gt;
+    provider: gitlab
+</code></pre>
+<p>Transfer the file into kubernetes with kubectl:</p>
+<pre><code class="language-bash">$ kubectl create secret generic git-providers --from-file=hosts.yml --namespace soluble
+secret/git-providers created
+</code></pre>
+<p>Zodiac will notice the change and start processing the repos that are available.</p>
+<h2 id="manual-assessments-cli">Manual Assessments - CLI</h2>
+<p>If you would prefer to run assessments manually, you can install the Soluble Fusion CLI on Linux, Mac or Windows.
+Please see the <a href="/cli">CLI installation documentation</a></p>
+<p>Once you have the CLI installed, you can <a href="/assessments">run your first assessment</a>.</p>
               
             </div>
           </div>
