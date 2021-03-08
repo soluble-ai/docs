@@ -9,7 +9,7 @@
   
   
   <link rel="shortcut icon" href="../img/favicon.ico">
-  <title>CI/CD Integration - Soluble Fusion Docs</title>
+  <title>CI/CD - Soluble Fusion Docs</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700" />
 
   <link rel="stylesheet" href="../css/theme.css" />
@@ -18,7 +18,7 @@
   
   <script>
     // Current page data
-    var mkdocs_page_name = "CI/CD Integration";
+    var mkdocs_page_name = "CI/CD";
     var mkdocs_page_input_path = "ci.md";
     var mkdocs_page_url = null;
   </script>
@@ -64,19 +64,29 @@
                     </li>
                 </ul>
                 <ul class="current">
-                    <li class="toctree-l1 current"><a class="reference internal current" href="./">CI/CD Integration</a>
+                    <li class="toctree-l1 current"><a class="reference internal current" href="./">CI/CD</a>
     <ul class="current">
-    <li class="toctree-l2"><a class="reference internal" href="#failing-builds">Failing Builds</a>
-        <ul>
-    <li class="toctree-l3"><a class="reference internal" href="#failing-at-end">Failing At End</a>
+    <li class="toctree-l2"><a class="reference internal" href="#zodiac">Zodiac</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#github-pr-status">GitHub PR Status</a>
+    <li class="toctree-l2"><a class="reference internal" href="#manual-integration">Manual Integration</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#failing-builds">Failing Builds</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#failing-at-end">Failing At End</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#github-pr-status">GitHub PR Status</a>
     </li>
         </ul>
     </li>
-    <li class="toctree-l2"><a class="reference internal" href="#circle-ci">Circle CI</a>
+    <li class="toctree-l3"><a class="reference internal" href="#ci-providers">CI Providers</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#circle-ci">Circle CI</a>
     </li>
-    <li class="toctree-l2"><a class="reference internal" href="#kubernetes-based-cicd">Kubernetes-based CI/CD</a>
+    <li class="toctree-l4"><a class="reference internal" href="#kubernetes-based-cicd">Kubernetes-based CI/CD</a>
+    </li>
+        </ul>
+    </li>
+        </ul>
     </li>
     </ul>
                     </li>
@@ -110,7 +120,7 @@
     
       
     
-    <li>CI/CD Integration</li>
+    <li>CI/CD</li>
     <li class="wy-breadcrumbs-aside">
       
     </li>
@@ -121,7 +131,18 @@
           <div role="main">
             <div class="section">
               
-                <h1 id="cicd-integration">CI/CD Integration</h1>
+                <h1 id="cicd">CI/CD</h1>
+<p>Integrating tools into CI/CD pipelines can be a difficult and time-consuming job.  If you are focused on a singular
+goal of getting your app to build, test and deploy, it is typically not so hard.  </p>
+<p>However when you find yourself in a position of needing to integrate security tools, the idea of making even a one-line
+change to your config can be daunting.</p>
+<p>We are addressing this by providing a Kubernetes-based CI system purposed-built for running Security tools.  Zodiac  enables security tools to be run entirely in parallel with no friction with the development team.</p>
+<h2 id="zodiac">Zodiac</h2>
+<p>Zodiac is the component that enables the autiomation assessments.  You read more about it in the 
+<a href="/getting-started/#automated-assessments-zodiac">Getting Started Guide</a>.</p>
+<h2 id="manual-integration">Manual Integration</h2>
+<p>This section describes how to integrate Soluble with your CI/CD platform by making changes to the job configuration.</p>
+<p>Before you go forward with this approach, please make sure that you have read through the <a href="#zodiac">Zodiac</a> section first.</p>
 <p>For most CI environments, the easiest way to install the soluble CLI is to add it to the build job itself.</p>
 <p>The following command will download and install the CLI on demand.</p>
 <p><code>curl -sL https://raw.githubusercontent.com/soluble-ai/soluble-cli/master/linux-install.sh | sh</code></p>
@@ -133,25 +154,26 @@ time the installation script is run, then the file <code>$HOME/.soluble/cli-conf
 values in from your own <code>${HOME}/.soluble/cli-config.json</code> that is created when you run <code>soluble login</code>.</p>
 <p>Note: If you would rather store and distribute <code>${HOME}/.soluble/cli-config.json</code> yourself, via Secrets Manager or S3 or another mechanism you are
 free to do so.  </p>
-<h2 id="failing-builds">Failing Builds</h2>
+<h3 id="failing-builds">Failing Builds</h3>
 <p>You can add <code>--fail SEVERITY=THRESHOLD_COUNT</code> for each assessment that you run.  </p>
 <p>If you add <code>--fail high=1</code> then the build fill fail if more than
 one High finding is detected.  Note that a critical finding will also trigger this failure.</p>
 <p>The order of finding severity is <code>critical</code> &gt; <code>high</code> &gt; <code>medium</code> &gt; <code>low</code> &gt; <code>info</code>.</p>
 <p>Note that the <code>--fail</code> flag only works with <code>--upload</code> because the finding severity is provided by Soluble Fusion, not the assessment tool.</p>
-<h3 id="failing-at-end">Failing At End</h3>
+<h4 id="failing-at-end">Failing At End</h4>
 <p>If you are running multiple assessments in a single build job, you might not want to fail at the first assessment.  This will prevent subsequent
 assessments from even running, since the CI platform will terminate execution with a command with a non-zero exit code.</p>
 <p>So if you would rather fail at the end, add the following:</p>
 <pre><code>soluble build report --fail high=1
 </code></pre>
 <p>at the end of the build job.  This will allow all the previous assessments to be run and reported before triggering a failure.</p>
-<h3 id="github-pr-status">GitHub PR Status</h3>
+<h4 id="github-pr-status">GitHub PR Status</h4>
 <p>Soluble can update <a href="https://docs.github.com/en/github/collaborating-with-issues-and-pull-requests/about-status-checks">GitHUb PR Status Checks</a>
 if you call <code>soluble update-pr</code>.</p>
 <p>For this to work, you need to have installed the Soluble GitHub App which enables the CLI to receive github API credentials to post status checks.</p>
 <p>To do this, while logged in to Soluble, run the following visit the following in your web browser. <a href="https://github.com/apps/soluble-fusion">https://github.com/apps/soluble-fusion</a>. </p>
-<h2 id="circle-ci">Circle CI</h2>
+<h3 id="ci-providers">CI Providers</h3>
+<h4 id="circle-ci">Circle CI</h4>
 <p>The following is an example for Circle CI with inline comments.</p>
 <pre><code class="language-yaml">version: 2.1
 
@@ -200,7 +222,7 @@ So you should use the machine image option.</p>
 <p>If you prefer not to do this and are happy to install and maintain checkov and other tools yourself, you can pass
 <code>--tool-path</code> as an argument to each soluble command.  </p>
 <p>For example, <code>--tool-path checkov</code> would use the checkov available on your PATH.</p>
-<h2 id="kubernetes-based-cicd">Kubernetes-based CI/CD</h2>
+<h4 id="kubernetes-based-cicd">Kubernetes-based CI/CD</h4>
 <p>Kubernetes-based CI/CD platforms such as Tekton, Drone, etc. will typically not have Docker available.  In this case
 you will need to have the tools pre-installed in the container image that you are using for the build execution and
 use the <code>--tool-path</code> option described above.</p>
