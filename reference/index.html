@@ -108,11 +108,33 @@
     </li>
         </ul>
     </li>
-    <li class="toctree-l2"><a class="reference internal" href="#config">Config</a>
+    <li class="toctree-l2"><a class="reference internal" href="#repo-config">Repo Config</a>
         <ul>
     <li class="toctree-l3"><a class="reference internal" href="#ignore-files">Ignore Files</a>
     </li>
     <li class="toctree-l3"><a class="reference internal" href="#suppress-findings">Suppress Findings</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#zodiac-config">Zodiac Config</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#http-proxy">HTTP Proxy</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#git-providers">Git Providers</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#github">GitHub</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#webhook-configuration">Webhook Configuration</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#gitlab">GitLab</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#webhook-configuration_1">Webhook Configuration</a>
+    </li>
+        </ul>
     </li>
         </ul>
     </li>
@@ -259,7 +281,7 @@
 <p><img alt="SSH Page" src="../img/aws-config.png" /></p>
 </li>
 </ol>
-<h2 id="config">Config</h2>
+<h2 id="repo-config">Repo Config</h2>
 <p>Each git repository can have a configuration file named <code>.soluble/config.yml</code> in the root of the repository.
 This file is sent along with the asessments and can control how Soluble Fusion behaves.</p>
 <p>The following describes the configuration options available in this file:</p>
@@ -279,6 +301,40 @@ This file is sent along with the asessments and can control how Soluble Fusion b
 </code></pre>
 <p>Note that you can also suppress findings from the UI.</p>
 <p><em>Note: Currently this directive only applies to assessments uploaded to Soluble Fusion.  The <code>suppress</code> directive will not be applied to local CLI output.</em></p>
+<h2 id="zodiac-config">Zodiac Config</h2>
+<h3 id="http-proxy">HTTP Proxy</h3>
+<p>If your environment requires an HTTP proxy to reach the internet, you will want to add <code>HTTP_PROXY</code> and 
+optionally <code>NO_PROXY</code> to the Zodiac kubernetes deployment manifest in the container spec section:</p>
+<pre><code class="language-yaml">      env:
+        - name: HTTP_PROXY
+          value: http://mycompanyproxy.com:8080
+        - name: NO_PROXY
+          value: internalhost.example.com,another.example.com
+</code></pre>
+<p>For example:</p>
+<p><img alt="Proxy" src="../img/proxy-example.png" /></p>
+<h2 id="git-providers">Git Providers</h2>
+<h3 id="github">GitHub</h3>
+<h4 id="webhook-configuration">Webhook Configuration</h4>
+<p>You will want to configure a webhook for reach repo that you want Soluble Fusion to scan.  Webhooks are configured for each repo here:</p>
+<p><a href="https://github.com/ORG_NAME/REPO_NAME/settings/hooks">https://github.com/ORG_NAME/REPO_NAME/settings/hooks</a></p>
+<p>Alternatively,
+you can use Organization Webhooks so that webhook events are sent for all of your repos, without having to configure each one.</p>
+<p>Organization webhooks are configured here:  </p>
+<p><a href="https://github.com/organizations/ORG_NAME/settings/hooks">https://github.com/organizations/ORG_NAME/settings/hooks</a></p>
+<p>The fields to configure are:</p>
+<p><em>Payload URL</em> - <code>https://api.soluble.cloud/api/v1/github/webhook/SOUBLE_ORG_ID</code></p>
+<p>Replace SOLUBLE_ORG_ID with the 12-digit organization id, which you can find here: <a href="https://app.soluble.cloud/admin/org">https://app.soluble.cloud/admin/org</a>.</p>
+<p>The content type should be test to <code>application/json</code>.</p>
+<p>In the <code>Secret</code> field, you should enter a shared secret.  You will configure the same secret here: <a href="https://app.demo.soluble.cloud/integrations/config/GitHub">https://app.demo.soluble.cloud/integrations/config/GitHub</a>.</p>
+<p>The events to send are <code>Pull</code> and <code>Pull Request</code>.  You can specify <em>Just Send Me Everything</em> if you like.</p>
+<p><img alt="Webhook Config" src="../img/github-org-webhook.png" /></p>
+<h3 id="gitlab">GitLab</h3>
+<h4 id="webhook-configuration_1">Webhook Configuration</h4>
+<p>GitLab webhooks should be configured similarly to GitHub above.</p>
+<p>The payload URL is:</p>
+<p><code>https://api.soluble.cloud/api/v1/gitlab/webhook/SOUBLE_ORG_ID</code></p>
+<p>Replace SOLUBLE_ORG_ID with the 12-digit organization id, which you can find here: <a href="https://app.soluble.cloud/admin/org">https://app.soluble.cloud/admin/org</a>.</p>
               
             </div>
           </div>
